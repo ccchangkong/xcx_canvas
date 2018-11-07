@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+<canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px" canvas-id="firstCanvas"></canvas>
+<image src='./image/bg.jpg'></image>
+</view>
