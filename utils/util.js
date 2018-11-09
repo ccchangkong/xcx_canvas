@@ -13,8 +13,21 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-const Promise = require('./promise')
+function wxGetImageInfo({ src }){
+  return new Promise((resolve, reject) => wx.getImageInfo({
+    src: src,
+    success: resolve,
+    fail: reject
+  }))
+}
+function wxGetSystemInfo() {
+  return new Promise((resolve, reject) => wx.getSystemInfo({
+    success: resolve,
+    fail: reject
+  }))
+}
 module.exports = {
   formatTime: formatTime,
-  Promise
+  wxGetImageInfo,
+  wxGetSystemInfo
 }
