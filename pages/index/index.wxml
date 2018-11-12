@@ -1,5 +1,10 @@
 <!--index.wxml-->
 <view class="container">
-<canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px" canvas-id="firstCanvas"></canvas>
-<image src="{{imgUrl}}"></image>
+<view class='header'>
+<image src="{{imgUrl}}" class='h_bg'></image>
+<text class='h_name'>{{userInfo.nickName}}</text>
+<image class='h_avt' src="{{userInfo.avatarUrl}}"></image>
+</view>
+
+
 </view>

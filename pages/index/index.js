@@ -2,11 +2,11 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
-const ctx = wx.createCanvasContext('firstCanvas')
 
+// http://www.17sucai.com/pins/demo-show?id=17282
 Page({
   data: {
-    imgUrl: '',
+    imgUrl: './image/bg.jpg',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -20,72 +20,39 @@ Page({
     })
   },
   onLoad: function() {
-    let rpx
-    let _this = this
-  
 
-    util.wxGetSystemInfo().then((res) => {
-      this.data.canvasWidth = res.windowWidth
-      this.data.canvasHeight = res.windowHeight * .8
-      rpx = res.windowWidth / 750 //750为设计稿宽度
-    }).then(()=>{
+    if (app.globalData.userInfo) {
       this.setData({
-        canvasWidth: this.data.canvasWidth,
-        canvasHeight: this.data.canvasHeight
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
       })
-    }).then(()=>{
-      util.wxGetImageInfo({ src: 'http://wx4.sinaimg.cn/mw690/6c7bfb12gy1ftui8gu8uaj20j60j1gmt.jpg' }).then((res) => {
-        console.log(res)
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
         this.setData({
-          imgUrl: res.path
+          userInfo: res.userInfo,
+          hasUserInfo: true
         })
-        var path = res.path;//这是得到文件的临时路径
-        //然后将图片画在背景图上
-       
-      
-        ctx.drawImage('./image/bg.jpg', 0, 0, this.data.canvasWidth, this.data.canvasHeight);
-        ctx.draw()
-         
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
       })
-    }).then(()=>{
-      ctx.save();
-      ctx.fillStyle = 'rgb(255, 0, 0)';
-      ctx.font = "normal bold 50px 黑体";
-      ctx.fillText("开心", 50, 50);
-      ctx.draw()
-      ctx.restore();
-      // ctx.draw(false, setTimeout(function () {
-      //   wx.canvasToTempFilePath({
-      //     canvasId: 'firstCanvas',
-      //     destWidth: _this.data.canvasWidth,//
-      //     destHeight: _this.data.canvasHeight,
-      //     fileType: "png",//文件格式，支持png和jpg
-      //     success: function (res) {
-      //       //这就是生成的文件临时路径
-      //       var tempFilePath = res.tempFilePath;
-
-      //       this.setData({
-      //         imgUrl: tempFilePath
-      //       })
-      //     },
-      //     fail: function (res) {
-      //       console.log(res);
-      //     }
-      //   })
-      // }, 1000))
-    })
+    }
+    console.log(this.data)
 
 
-    
-    // wx.chooseImage({
-    //   success: function (res) {
-    //     ctx.drawImage(res.tempFilePaths[0], 0, 0, 150, 100)
-    //     ctx.draw()
-    //   }
-    // })
 
-    // context.drawImage('./image/bg.jpg', 0, 0, this.data.canvasWidth, this.data.canvasHeight)
-    // s.drawImage(Url, 0, 0, 265 * rpx, 262.5 * rpx);
+
+
   },
   getUserInfo: function(e) {
     console.log(e)

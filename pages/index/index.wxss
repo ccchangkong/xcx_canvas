@@ -12,10 +12,32 @@
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.header{
+  position: relative;
 }
-
-.usermotto {
-  margin-top: 200px;
+.h_bg{
+  width: 750rpx;
+  height: 469rpx;
+  /* height: auto; */
+  display: block;
+}
+.h_name{
+  position: absolute;
+      text-align: right;
+    right: 225rpx;
+    bottom: 30rpx;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 1px 0.5px #000;
+}
+.h_avt{
+  position: absolute;
+      width: 168rpx;
+    height: 168rpx;
+    border: 1px solid #dbdbdb;
+    right: 25rpx;
+    bottom: -65rpx;
+    padding: 1px;
+    background-color: #fff;
 }
