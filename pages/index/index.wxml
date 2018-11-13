@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-<view class='header'>
+<view class='header' bindtap='bindViewTap'>
 <image src="{{imgUrl}}" class='h_bg'></image>
 <text class='h_name'>{{userInfo.nickName}}</text>
 <image class='h_avt' src="{{userInfo.avatarUrl}}"></image>

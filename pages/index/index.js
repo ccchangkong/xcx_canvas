@@ -15,12 +15,13 @@ Page({
   },
   //事件处理函数
   bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    var _this = this;
+    console.log(_this)
+    // wx.navigateTo({
+    //   url: '../logs/logs'
+    // })
   },
   onLoad: function() {
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
